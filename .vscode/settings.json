@@ -1,0 +1,14 @@
+{
+    "stylelint.snippet": [
+        "css",
+        "postcss",
+        "typescript",
+        "javascript"
+    ],
+    "stylelint.validate": [
+        "css",
+        "postcss",
+        "typescript",
+        "javascript"
+    ]
+}
