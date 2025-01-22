@@ -1,12 +1,12 @@
 class PlayerModel {
   final String nickname;
-  final String socketID;
+  final String socketId;
   final double points;
   final String playerType;
 
   PlayerModel(
       {required this.nickname,
-      required this.socketID,
+      required this.socketId,
       required this.points,
       required this.playerType});
 
@@ -14,7 +14,7 @@ class PlayerModel {
   Map<String, dynamic> toMap() {
     return {
       'nickname': nickname,
-      'socketID': socketID,
+      'socketId': socketId,
       'points': points,
       'playerType': playerType,
     };
@@ -24,7 +24,7 @@ class PlayerModel {
   factory PlayerModel.fromMap(Map<String, dynamic> map) {
     return PlayerModel(
       nickname: map['nickname'] as String,
-      socketID: map['socketID'] as String,
+      socketId: map['socketId'] as String,
       points: (map['points'] as num).toDouble(), // Ensure points is a double
       playerType: map['playerType'] as String,
     );
@@ -33,13 +33,13 @@ class PlayerModel {
   // Create a copy of PlayerModel with updated values
   PlayerModel copyWith({
     String? nickname,
-    String? socketID,
+    String? socketId,
     double? points,
     String? playerType,
   }) {
     return PlayerModel(
       nickname: nickname ?? this.nickname,
-      socketID: socketID ?? this.socketID,
+      socketId: socketId ?? this.socketId,
       points: points ?? this.points,
       playerType: playerType ?? this.playerType,
     );

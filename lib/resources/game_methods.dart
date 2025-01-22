@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socket_io_client/socket_io_client.dart';
@@ -68,29 +70,53 @@ class GameMethods {
             roomDataProvider.displayElements[6] &&
         roomDataProvider.displayElements[2] != '') {
       winner = roomDataProvider.displayElements[2];
-    } else if (roomDataProvider.filledBoxes == 9) {
-      winner = '';
-      showGameDialougeBox(context, "Draw");
     }
+
+    // if (winner != '') {
+    //   if (roomDataProvider.player1.playerType == winner) {
+    //     showGameDialougeBox(context,
+    //         "${roomDataProvider.roomData['players'][0]['nickname']} Wins");
+    //     socket.emit("winner", {
+    //       "winnerSocketId": roomDataProvider.player1.socketID,
+    //       "roomId": roomDataProvider.roomData['_id'],
+    //     });
+    //     clearBoard(context);
+    //   } else {
+    //     showGameDialougeBox(context,
+    //         "${roomDataProvider.roomData['players'][1]['nickname']} Wins");
+    //     socket.emit("winner", {
+    //       "winnerSocketId": roomDataProvider.player2.socketID,
+    //       "roomId": roomDataProvider.roomData['_id'],
+    //     });
+    //     clearBoard(context);
+    //   }
+    // }
 
     if (winner != '') {
       if (roomDataProvider.player1.playerType == winner) {
         showGameDialougeBox(context,
             "${roomDataProvider.roomData['players'][0]['nickname']} Wins");
+        log(" ${roomDataProvider.roomData['players'][1]['socketId']}");
         socket.emit("winner", {
-          "winnerSocketId": roomDataProvider.player1.socketID,
+          "winnerSocketId":
+              roomDataProvider.roomData['players'][0]['socketId'].toString(),
           "roomId": roomDataProvider.roomData['_id'],
         });
-        clearBoard(context); 
       } else {
         showGameDialougeBox(context,
             "${roomDataProvider.roomData['players'][1]['nickname']} Wins");
+        log(" ${roomDataProvider.roomData['players'][1]['socketId']}");
         socket.emit("winner", {
-          "winnerSocketId": roomDataProvider.player2.socketID,
+          "winnerSocketId":
+              roomDataProvider.roomData['players'][1]['socketId'].toString(),
           "roomId": roomDataProvider.roomData['_id'],
         });
-        clearBoard(context); 
       }
+      clearBoard(context); // Clear the board after a win
+    } else if (roomDataProvider.filledBoxes == 9) {
+      // Only declare a draw if no winner exists
+      showGameDialougeBox(context, "Draw");
+      clearBoard(context); // Clear the board after a draw
     }
   }
 
@@ -98,10 +124,10 @@ class GameMethods {
     RoomDataProvider roomDataProvider =
         Provider.of<RoomDataProvider>(context, listen: false);
 
-    for (int i = 0; i < roomDataProvider.displayElements.length; i++) {
-      roomDataProvider.updateDisplayElements(i, '');
-
-    }
-    roomDataProvider.setFilledBoxesTo0();
+    // for (int i = 0; i < roomDataProvider.displayElements.length; i++) {
+    //   roomDataProvider.updateDisplayElements(i, '');
+    // }
+    // roomDataProvider.setFilledBoxesTo0();
+    roomDataProvider.resetGame();
   }
 }

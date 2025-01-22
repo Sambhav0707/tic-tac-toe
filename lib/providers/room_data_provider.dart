@@ -7,10 +7,10 @@ class RoomDataProvider extends ChangeNotifier {
   Map<String, dynamic> _roomData = {};
   int _filledBoxes = 0;
   PlayerModel _player1 =
-      PlayerModel(nickname: '', socketID: '', points: 0, playerType: 'X');
+      PlayerModel(nickname: '', socketId: '', points: 0, playerType: 'X');
 
   PlayerModel _player2 =
-      PlayerModel(nickname: '', socketID: '', points: 0, playerType: 'O');
+      PlayerModel(nickname: '', socketId: '', points: 0, playerType: 'O');
 
   List<String> _displayElements = ['', '', '', '', '', '', '', '', ''];
 
@@ -40,15 +40,25 @@ class RoomDataProvider extends ChangeNotifier {
   }
 
   void updateDisplayElements(int index, String choice) {
-    _displayElements[index] = choice;
-
-    _filledBoxes += 1;
-
-    notifyListeners();
+    if (_displayElements[index] == '') { // Prevent overwriting filled cells
+      _displayElements[index] = choice;
+      _filledBoxes += 1;
+      log('Updated displayElements: $_displayElements');
+      notifyListeners();
+    } else {
+      log('Cell $index is already filled with ${_displayElements[index]}');
+    }
   }
 
-  void setFilledBoxesTo0(){
+  void setFilledBoxesTo0() {
     _filledBoxes = 0;
-    
+    notifyListeners(); // Notify listeners after resetting
+  }
+
+  void resetGame() {
+    _displayElements = List.filled(9, ''); // Reset display elements
+    setFilledBoxesTo0(); // Reset filled boxes
+    notifyListeners(); // Notify listeners
   }
 }
+

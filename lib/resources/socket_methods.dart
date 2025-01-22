@@ -135,7 +135,7 @@ class SocketMethods {
       RoomDataProvider roomDataProvider =
           Provider.of<RoomDataProvider>(context, listen: false);
 
-      if (playerData['socketID'] == roomDataProvider.player1.socketID) {
+      if (playerData['socketId'] == roomDataProvider.player1.socketId) {
         roomDataProvider.updatePlayer1(playerData);
       } else {
         roomDataProvider.updatePlayer2(playerData);

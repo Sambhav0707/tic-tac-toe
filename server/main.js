@@ -137,16 +137,25 @@ io.on("connection", (socket) => {
         return;
       }
   
-      player.points += 1; // Increment points
-      console.log(`Player ${player.nickname} now has ${player.points} points.`);
+      // player.points += 1; // Increment points
+      // console.log(`Player ${player.nickname} now has ${player.points} points.`);
+      
+      console.log(`room data: ${room}`);
+
+      room.currentRound += 1;
+      room = await room.save();
+
+
   
       // Save updated room
   
-      if (player.points >= room.maxRounds) {
+      if (room.currentRound == 6) {
         io.to(roomId).emit("endGame", player);
         room = await room.save();
       } else {
         io.to(roomId).emit("pointIncrease", player);
+        player.points += 1; // Increment points
+      console.log(`Player ${player.nickname} now has ${player.points} points.`);
         room = await room.save();
       }
     } catch (e) {

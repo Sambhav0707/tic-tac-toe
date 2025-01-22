@@ -30,29 +30,35 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    RoomDataProvider roomDataProvider = Provider.of<RoomDataProvider>(context);
+    RoomDataProvider roomDataProvider = Provider.of<RoomDataProvider>(context );
 
     return Scaffold(
       body: roomDataProvider.roomData['isJoin']
           ? const WaitingLobby()
-          : const SafeArea(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Scoreborad(),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TicTacToeBoard(),
-                  )
+          : Consumer<RoomDataProvider>(
+            builder: (context , roomDataProvider , child) {
+              return  SafeArea(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Scoreborad(),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TicTacToeBoard(),
+                      ),
 
-                  // Text(roomDataProvider.roomData['players'][0]['nickname'].toString(), style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold),),
-                  // SizedBox(height: 20,),
-                  //  Text(roomDataProvider.player1.nickname.toString()),
-                  //  SizedBox(height: 20,),
-                  //  Text(roomDataProvider.player2.nickname.toString()),
-                ],
-              ),
-            ),
+                      Text("${roomDataProvider.roomData['turn']['nickname']}'s Turn"),
+              
+                      // Text(roomDataProvider.roomData['players'][0]['nickname'].toString(), style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold),),
+                      // SizedBox(height: 20,),
+                      //  Text(roomDataProvider.player1.nickname.toString()),
+                      //  SizedBox(height: 20,),
+                      //  Text(roomDataProvider.player2.nickname.toString()),
+                    ],
+                  ),
+                );
+            }
+          ),
     );
   }
 }

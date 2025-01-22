@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/providers/room_data_provider.dart';
@@ -9,7 +7,7 @@ class Scoreborad extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RoomDataProvider roomDataProvider = Provider.of(context);
+    RoomDataProvider roomDataProvider = Provider.of(context, listen: true);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -30,14 +28,18 @@ class Scoreborad extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              Text(
-                roomDataProvider.player1.points.toInt().toString(),
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
+              Consumer<RoomDataProvider>(
+                  builder: (context, roomDataProvider, child) {
+                return Text(
+                  // roomDataProvider.player1.points.toInt().toString(),
+                  roomDataProvider.roomData['players'][0]['points'].toString(),
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                );
+              }),
             ],
           ),
         ),
@@ -53,20 +55,23 @@ class Scoreborad extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
-                
               ),
-            
               const SizedBox(
                 height: 5,
               ),
-              Text(
-                roomDataProvider.player2.points.toInt().toString(),
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
+              Consumer<RoomDataProvider>(
+                  builder: (context, roomDataProvider, child) {
+                return Text(
+                  // roomDataProvider.player2.points.toInt().toString(),
+                  roomDataProvider.roomData['players'][1]['points'].toString(),
+
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                );
+              }),
             ],
           ),
         )
