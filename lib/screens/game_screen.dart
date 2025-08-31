@@ -41,13 +41,17 @@ class _GameScreenState extends State<GameScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Scoreborad(),
-                      Padding(
+                      const Scoreborad(),
+                      const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: TicTacToeBoard(),
                       ),
 
                       Text("${roomDataProvider.roomData['turn']['nickname']}'s Turn"),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text("${roomDataProvider.roomData["currentRound"].toString()}")
               
                       // Text(roomDataProvider.roomData['players'][0]['nickname'].toString(), style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold),),
                       // SizedBox(height: 20,),
@@ -62,3 +66,5 @@ class _GameScreenState extends State<GameScreen> {
     );
   }
 }
+
+

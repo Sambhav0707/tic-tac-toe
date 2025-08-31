@@ -12,7 +12,7 @@ var io = require("socket.io")(server);
 app.use(express.json());
 
 const DB =
-  "mongodb+srv://sambhav07:sambhav_07@cluster0.zhujp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+  "";
 
 io.on("connection", (socket) => {
   console.log("conected");

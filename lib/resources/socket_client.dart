@@ -23,7 +23,7 @@ class SocketClient {
   //   log("Socket connected: ${socket!.connected}");
   // }
   SocketClient._intenal() {
-    socket = IO.io('http://192.168.29.36:3000', <String, dynamic>{
+    socket = IO.io('http://localhost:3000', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
     });

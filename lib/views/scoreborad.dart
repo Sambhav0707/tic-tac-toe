@@ -28,18 +28,18 @@ class Scoreborad extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              Consumer<RoomDataProvider>(
-                  builder: (context, roomDataProvider, child) {
-                return Text(
-                  // roomDataProvider.player1.points.toInt().toString(),
-                  roomDataProvider.roomData['players'][0]['points'].toString(),
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                );
-              }),
+              // Consumer<RoomDataProvider>(
+              //     builder: (context, roomDataProvider, child) {
+              //   return Text(
+              //     // roomDataProvider.player1.points.toInt().toString(),
+              //     roomDataProvider.roomData['players'][0]['points'].toString(),
+              //     style: const TextStyle(
+              //       fontSize: 15,
+              //       fontWeight: FontWeight.bold,
+              //       color: Colors.white,
+              //     ),
+              //   );
+              // }),
             ],
           ),
         ),
@@ -59,19 +59,19 @@ class Scoreborad extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              Consumer<RoomDataProvider>(
-                  builder: (context, roomDataProvider, child) {
-                return Text(
-                  // roomDataProvider.player2.points.toInt().toString(),
-                  roomDataProvider.roomData['players'][1]['points'].toString(),
+              // Consumer<RoomDataProvider>(
+              //     builder: (context, roomDataProvider, child) {
+              //   return Text(
+              //     // roomDataProvider.player2.points.toInt().toString(),
+              //     roomDataProvider.roomData['players'][1]['points'].toString(),
 
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                );
-              }),
+              //     style: const TextStyle(
+              //       fontSize: 15,
+              //       fontWeight: FontWeight.bold,
+              //       color: Colors.white,
+              //     ),
+              //   );
+              // }),
             ],
           ),
         )
